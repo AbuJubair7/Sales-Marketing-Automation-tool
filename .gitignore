@@ -35,4 +35,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 #extra files
-# ormconfig.ts
+ormconfig.ts
