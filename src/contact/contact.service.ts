@@ -8,22 +8,24 @@ import * as fs from 'fs';
 import * as fastCsv from 'fast-csv';
 
 @Injectable()
-export class ContactService{
-    constructor(
-        @InjectRepository(Contact)
-        private readonly contactRepo: Repository<Contact>,
-    ) {}
+export class ContactService {
+  constructor(
+    @InjectRepository(Contact)
+    private readonly contactRepo: Repository<Contact>,
+  ) {}
 
-    async createContact(data: ContactDto){
-        const contact = await this.contactRepo.create(data);
-        return await this.contactRepo.save(contact);
-    }
+  async createContact(data: ContactDto) {
+    const contact = await this.contactRepo.create(data);
+    return await this.contactRepo.save(contact);
+  }
 
-    async findContact(data){
-        const contact = await this.contactRepo.findOne({ where: [{ name: data.val },{ email: data.val }] });
-        if(contact) return contact;
-        else throw new NotFoundException('No data found');
-    }
+  async findContact(data) {
+    const contact = await this.contactRepo.findOne({
+      where: [{ name: data.val }, { email: data.val }],
+    });
+    if (contact) return contact;
+    else throw new NotFoundException('No data found');
+  }
 
     async findAll() {
         return this.contactRepo.find();
@@ -45,6 +47,8 @@ export class ContactService{
         data.forEach(item => {
           csvStream.write(item);
         });
-        csvStream.end();
+        csvStream.end();   
     }
 }
+
+  

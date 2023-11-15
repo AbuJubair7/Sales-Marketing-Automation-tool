@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Tracking } from "src/entities/tracking.entity";
@@ -10,16 +10,22 @@ export class TrackingService{
     constructor(
         @InjectRepository(Tracking)
         private readonly trackingRepo: Repository<Tracking>,
+
+        @InjectRepository(Contact)
         private readonly contactRepo: Repository<Contact>,
     ) {}
 
-    async trackLinkClick(id: number, link: string) {
-        const contact = await this.contactRepo.findOne({ where: { id: id } });
-        if (contact) {
-            const linkClick = new Tracking();
-            linkClick.link = link;
-            linkClick.contact = contact;
-            await this.trackingRepo.save(linkClick);
-        }
+    async trackContact(data) {
+      let contact = await this.contactRepo.findOne({ where: [{ email: data.val }] });
+      if (!contact) {
+        const anonymousTracking = this.trackingRepo.create({
+          email: "anonymous@gmail.com",
+          timestamp: new Date(),
+        });
+        await this.trackingRepo.save(anonymousTracking);
+        //await this.trackingRepo.save({ NotFound: null, timestamp: new Date() });
+        throw new NotFoundException('This contact is not recorded');
+      }
+      await this.trackingRepo.save({ contact, timestamp: new Date() });
     }
 }

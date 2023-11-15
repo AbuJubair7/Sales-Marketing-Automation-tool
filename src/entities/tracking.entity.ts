@@ -1,23 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { IsEmail } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Contact } from "./contact.entity";
 
 @Entity('tracking')
 export class Tracking{
     @PrimaryGeneratedColumn()
-    trackid: number;
+    trackId: number;
 
-    @Column({ nullable: false })
-    link: string;
+    @Column()
+    email: string;
 
-    @Column({ default: () => 'CURRENT_TIMESTAMP', nullable: false })
-    click_timestamp: Date;
+    @ManyToOne(() => Contact, { onDelete: 'CASCADE' }) 
+    @JoinColumn({ name: 'email', referencedColumnName: 'email' })
+    contact: Contact;
 
-    @ManyToOne(() => Contact, contact => contact.tracking)
-    contact: Contact;  
-
-    // @BeforeInsert()
-    // async hashPassword() {
-    //     this.password = await bcrypt.hash(this.password, 10);
-    // }
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    timestamp: Date;
 }
 

@@ -6,9 +6,8 @@ import { ContactController } from "./contact.controller";
 import { ContactService } from "./contact.service";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Contact]), TypeOrmModule.forRoot(ormConfig)],
+    imports: [TypeOrmModule.forFeature([Contact])],
     controllers: [ContactController],
     providers: [ContactService],
 })
-
-export class ContactModule{}
+export class ContactModule {}

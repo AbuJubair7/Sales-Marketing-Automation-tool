@@ -1,11 +1,7 @@
-import { IsDate, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty } from "class-validator";
 
-export class ContactDto{
+export class TrackingDto{
     @IsNotEmpty()
-    @IsString()
-    readonly link: string;  
-
-    @IsNotEmpty()
-    @IsDate()
-    readonly click_timestamp: Date;
+    @IsEmail()
+    readonly email: string;  
 }
