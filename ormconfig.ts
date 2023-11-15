@@ -1,3 +1,4 @@
+import { User } from 'src/entities/user.entity';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 const ormConfig: PostgresConnectionOptions = {
@@ -7,7 +8,7 @@ const ormConfig: PostgresConnectionOptions = {
   port: 5433,
   username: 'postgres',
   password: '11495',
-  entities: [],
+  entities: [User],
   synchronize: true,
   schema: 'public',
 };
