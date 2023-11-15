@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Tracking } from "./tracking.entity";
 
 @Entity('contact')
 export class Contact{
@@ -19,6 +20,9 @@ export class Contact{
 
     @Column({ nullable: false })
     address: string;
+
+    @OneToMany(() => Tracking, tracking => tracking.contact)
+    tracking: Tracking[];
 
     // @BeforeInsert()
     // async hashPassword() {

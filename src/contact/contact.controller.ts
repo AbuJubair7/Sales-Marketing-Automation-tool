@@ -16,6 +16,11 @@ export class ContactController{
         return this.service.findContact(data);
     }
 
+    @Get('findall')
+    findAll() {
+        return this.service.findAll();
+    }
+
     @Put('update/:data')
     update(@Param('data') id: number, @Body() data: ContactDto) {
         this.service.updateContact(id, data);
@@ -24,5 +29,10 @@ export class ContactController{
     @Delete('delete/:id')
     delete(@Param('id') id: number) {
         return this.service.deleteContact(id);
+    }
+
+    @Get('export')
+    async exportToCsv() {
+        await this.service.exportToCsv();
     }
 }
