@@ -12,12 +12,14 @@ import { ContactModule } from './contact/contact.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ValidationMiddleware } from './middleware/validation-middleware';
+import { TrackingModule } from './leadTracking/tracking.module';
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
     ContactModule,
+    TrackingModule,
     TypeOrmModule.forRoot(ormConfig),
   ],
   controllers: [AppController],
