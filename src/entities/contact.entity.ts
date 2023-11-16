@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from "typeorm";
 import { Tracking } from "./tracking.entity";
-=======
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
->>>>>>> 7e1a9247303be3b25050acd74377835915efbbb4
 
 @Entity('contact')
 export class Contact {
@@ -25,7 +21,6 @@ export class Contact {
   @Column({ nullable: false })
   address: string;
 
-<<<<<<< HEAD
     @OneToMany(() => Tracking, tracking => tracking.contact)
     tracking: Tracking[];
 
@@ -33,10 +28,4 @@ export class Contact {
     // async hashPassword() {
     //     this.password = await bcrypt.hash(this.password, 10);
     // }
-=======
-  // @BeforeInsert()
-  // async hashPassword() {
-  //     this.password = await bcrypt.hash(this.password, 10);
-  // }
->>>>>>> 7e1a9247303be3b25050acd74377835915efbbb4
 }

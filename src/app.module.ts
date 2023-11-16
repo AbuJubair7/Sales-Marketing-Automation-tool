@@ -9,24 +9,19 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import ormConfig from 'ormconfig';
 import { ContactModule } from './contact/contact.module';
-<<<<<<< HEAD
-import { TrackingModule } from './leadTracking/tracking.module';
-
-@Module({
-  imports: [ContactModule, TrackingModule, TypeOrmModule.forRoot(ormConfig)],
-=======
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ValidationMiddleware } from './middleware/validation-middleware';
+import { TrackingModule } from './leadTracking/tracking.module';
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
     ContactModule,
+    TrackingModule,
     TypeOrmModule.forRoot(ormConfig),
   ],
->>>>>>> 7e1a9247303be3b25050acd74377835915efbbb4
   controllers: [AppController],
   providers: [AppService],
 })

@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
-
+  
   @Column({ nullable: false })
   name: string;
 
