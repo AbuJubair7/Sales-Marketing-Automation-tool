@@ -27,24 +27,24 @@ export class ContactController {
 
   @Get('findall')
   findAll() {
-      return this.service.findAll();
+    return this.service.findAll();
   }
 
   @Put('update/:data')
   async update(@Param('data') id: number, @Body() data: ContactDto) {
-      await this.service.updateContact(id, data);
-      return await 'Updated successfully!';
+    await this.service.updateContact(id, data);
+    return await 'Updated successfully!';
   }
 
   @Delete('delete/:id')
   async delete(@Param('id') id: number) {
-      await this.service.deleteContact(id);
-      return await 'Deleted successfully!';
+    await this.service.deleteContact(id);
+    return await 'Deleted successfully!';
   }
 
   @Get('export')
   async exportToCsv() {
-      await this.service.exportToCsv();
-      return await 'Exported successfully!';
+    await this.service.exportToCsv();
+    return await 'Exported successfully!';
   }
 }
