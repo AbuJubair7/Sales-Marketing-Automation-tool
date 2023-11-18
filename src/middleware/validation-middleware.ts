@@ -5,6 +5,8 @@ import { CreateAuthDto } from 'src/auth/dto/create-auth.dto';
 import { UpdateAuthDto } from 'src/auth/dto/update-auth.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UpdateUserDto } from 'src/user/dto/update-user.dto';
+import { ContactDto } from 'src/contact/dto/contact.dto';
+import { PaymentDto } from 'src/payment/dto/payment.dto';
 
 @Injectable()
 export class ValidationMiddleware implements NestMiddleware {
@@ -18,6 +20,8 @@ export class ValidationMiddleware implements NestMiddleware {
       CreateUserDto,
       UpdateAuthDto,
       UpdateUserDto,
+      ContactDto,
+      PaymentDto,
     };
 
     const selectedDto = dtoClasses[dtoData];

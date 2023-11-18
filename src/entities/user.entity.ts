@@ -3,9 +3,11 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Payment } from './payment.entity';
 
 @Entity('user')
 export class User {
@@ -15,7 +17,7 @@ export class User {
   @Column({ nullable: false })
   name: string;
 
-  @Column({ nullable: false })
+  @Column({ unique: true, nullable: false })
   email: string;
 
   @Column({ nullable: true })
@@ -29,10 +31,13 @@ export class User {
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, (await bcrypt.genSalt(10)));
   }
-  @BeforeUpdate()
-  async updateHash() {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
+  // @BeforeUpdate()
+  // async updateHash() {
+  //   this.password = await bcrypt.hash(this.password, 10);
+  // }
+
+  @OneToMany(() => Payment, payment => payment.User)
+  payment: Payment[];
 }

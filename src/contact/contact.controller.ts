@@ -8,13 +8,15 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtGuard } from 'src/auth/guard/jwt.guard';
 
 @Controller('contact')
 export class ContactController {
   constructor(private readonly service: ContactService) {}
 
-  @Post('create')
+  @Post('create/ContactDto')
   async create(@Body() data: ContactDto) {
     await this.service.createContact(data);
     return await 'Created successfully!';
@@ -25,12 +27,13 @@ export class ContactController {
     return this.service.findContact(data);
   }
 
+  //@UseGuards(JwtGuard)
   @Get('findall')
   findAll() {
       return this.service.findAll();
   }
 
-  @Put('update/:data')
+  @Put('update/:data/ContactDto')
   async update(@Param('data') id: number, @Body() data: ContactDto) {
       await this.service.updateContact(id, data);
       return await 'Updated successfully!';

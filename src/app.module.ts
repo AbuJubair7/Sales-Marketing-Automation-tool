@@ -13,6 +13,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ValidationMiddleware } from './middleware/validation-middleware';
 import { TrackingModule } from './leadTracking/tracking.module';
+import { PaymentModule } from './payment/payment.module';
+import { PaymentPlanModule } from './paymentPlan/paymentPlan.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { TrackingModule } from './leadTracking/tracking.module';
     AuthModule,
     ContactModule,
     TrackingModule,
+    PaymentPlanModule,
+    PaymentModule,
     TypeOrmModule.forRoot(ormConfig),
   ],
   controllers: [AppController],
