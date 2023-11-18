@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ValidationMiddleware } from './middleware/validation-middleware';
 import { TrackingModule } from './leadTracking/tracking.module';
+import { SubscriptionModule } from './subscription/subscription.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TrackingModule } from './leadTracking/tracking.module';
     ContactModule,
     TrackingModule,
     TypeOrmModule.forRoot(ormConfig),
+    SubscriptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
