@@ -16,6 +16,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { Request } from 'express';
+import { Roles } from 'src/decorators/role.decorator';
+import { UserRole } from 'user-role.enum';
+import { RoleGuard } from 'src/auth/guard/role.guard';
 
 @Controller('user')
 export class UserController {
@@ -26,21 +29,30 @@ export class UserController {
     return await this.userService.create(createUserDto);
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
+  @Roles(UserRole.MANAGER, UserRole.ADMIN)
   @Get()
   async findAll(@Req() req: Request) {
     if (req.user) return await this.userService.findAll();
     throw new NotFoundException('Not found!');
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.MANAGER,
+    UserRole.EMPLOYEE,
+    UserRole.SALER,
+    UserRole.MARKETER,
+  )
   @Get(':id')
   async findOne(@Param('id') id: number, @Req() req: Request) {
     if (req.user) return await this.userService.findOne(id);
     throw new NotFoundException('Not found!');
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
+  @Roles(UserRole.MANAGER, UserRole.EMPLOYEE, UserRole.SALER, UserRole.MARKETER)
   @Patch(':id/UpdateUserDto')
   async update(
     @Param('id') id: number,
@@ -51,7 +63,8 @@ export class UserController {
     throw new UnauthorizedException('You are not allowed to do the operation!');
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
+  @Roles(UserRole.MANAGER, UserRole.ADMIN)
   @Delete(':id')
   async remove(@Param('id') id: number, @Req() req: Request) {
     if (req.user) return await this.userService.remove(id);

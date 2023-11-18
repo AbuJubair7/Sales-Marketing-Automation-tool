@@ -20,15 +20,17 @@ export class AuthService {
   async singIn(data: any) {
     const user = await this.userService.findOne(data.email);
 
-    if (user && (await bcrypt.compare(data.password, user.password)))
-      return this.signToken(user.id, user.email);
+    if (user && (await bcrypt.compare(data.password, user.password))) {
+      return this.signToken(user.id, user.email, user.role);
+    }
     throw new UnauthorizedException('Email or password error!');
   }
 
-  async signToken(userId: number, email: string) {
+  async signToken(userId: number, email: string, role: string) {
     const payload = {
       sub: userId,
       email,
+      role,
     };
     const secretKey = this.config.get('JWT_SECRET');
 

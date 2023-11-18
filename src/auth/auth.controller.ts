@@ -6,12 +6,12 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('signUp/CreateAuthDto')
+  @Post('signup/CreateAuthDto')
   async signUp(@Body() createAuthDto: CreateAuthDto) {
     return await this.authService.signUp(createAuthDto);
   }
 
-  @Get('signIn')
+  @Get('signin')
   async signIn(@Body() data: any) {
     return await this.authService.singIn(data);
   }
