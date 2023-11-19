@@ -16,13 +16,13 @@ export class PaymentPlanService {
     return await this.paymentPlanRepo.save(paymentPlanData);
   }
 
-//   async findAll() {
-//     return this.contactRepo.find();
-//   }
+  async findAll() {
+    return this.paymentPlanRepo.find();
+  }
 
-//   async updateContact(id: number, data: ContactDto) {
-//     return this.contactRepo.update(id, data);
-//   }
+  async updatePlan(planId: number, data: PaymentPlanDto) {
+    return this.paymentPlanRepo.update(planId, data);
+  }
 
 //   async deleteContact(data: number) {
 //     return this.contactRepo.delete(data);

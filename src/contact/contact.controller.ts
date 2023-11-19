@@ -16,6 +16,7 @@ import { JwtGuard } from 'src/auth/guard/jwt.guard';
 export class ContactController {
   constructor(private readonly service: ContactService) {}
 
+  //@Post('create/ContactDto')
   @Post('create/ContactDto')
   async create(@Body() data: ContactDto) {
     await this.service.createContact(data);
@@ -28,12 +29,18 @@ export class ContactController {
   }
 
   //@UseGuards(JwtGuard)
+  @Get('filtering')
+  contactFiltering(@Body() data:any) {
+      return this.service.contactFiltering(data);
+  }
+
+  //@UseGuards(JwtGuard)
   @Get('findall')
   findAll() {
       return this.service.findAll();
   }
 
-  @Put('update/:data/ContactDto')
+  @Put('update/:data')
   async update(@Param('data') id: number, @Body() data: ContactDto) {
       await this.service.updateContact(id, data);
       return await 'Updated successfully!';

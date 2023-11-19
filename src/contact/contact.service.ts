@@ -27,6 +27,14 @@ export class ContactService {
     else throw new NotFoundException('No data found');
   }
 
+  async contactFiltering(data:any) {
+    const contact = await this.contactRepo.find({
+      where: [{ name: data.val }, { email: data.val }, { gender: data.val }],
+    });
+    if (contact) return contact;
+    else throw new NotFoundException('No data found');
+  }
+
   async findAll() {
     return this.contactRepo.find();
   }

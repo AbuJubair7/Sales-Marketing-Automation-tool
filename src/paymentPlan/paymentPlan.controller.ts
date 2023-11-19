@@ -1,5 +1,5 @@
 //import { JwtGuard } from 'src/auth/guard/jwt.guard';
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { PaymentPlanService } from "./paymentPlan.service";
 import { PaymentPlanDto } from "./dto/paymentPlan.dto"
 
@@ -13,21 +13,21 @@ export class PaymentPlanController {
     return await 'Created successfully!';
   }
 
+  // //@UseGuards(JwtGuard)
+  @Get('findall')
+  findAll() {
+      return this.service.findAll();
+  }
+
+  @Put('update/:data/PaymentPlanDto')
+  async update(@Param('data') planId: number, @Body() data: PaymentPlanDto) {
+      await this.service.updatePlan(planId, data);
+      return await 'Updated successfully!';
+  }
+
   // @Get('find')
   // find(@Body() data) {
   //   return this.service.findContact(data);
-  // }
-
-  // //@UseGuards(JwtGuard)
-  // @Get('findall')
-  // findAll() {
-  //     return this.service.findAll();
-  // }
-
-  // @Put('update/:data/ContactDto')
-  // async update(@Param('data') id: number, @Body() data: ContactDto) {
-  //     await this.service.updateContact(id, data);
-  //     return await 'Updated successfully!';
   // }
 
   // @Delete('delete/:id')

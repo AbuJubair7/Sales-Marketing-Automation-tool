@@ -19,7 +19,8 @@ export class AuthService {
 
   async singIn(data: any) {
     const user = await this.userService.findOne(data.email);
-
+    //console.log(data.email+data.password);
+    
     if (user && (await bcrypt.compare(data.password, user.password)))
       return this.signToken(user.id, user.email);
     throw new UnauthorizedException('Email or password error!');
