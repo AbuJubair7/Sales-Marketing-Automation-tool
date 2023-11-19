@@ -2,6 +2,9 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateSubscriptionDto {
   @IsNumber()
+  readonly paymentId: number;
+
+  @IsNumber()
   readonly subscriberId: number;
 
   @IsString()
