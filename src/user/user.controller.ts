@@ -31,7 +31,7 @@ export class UserController {
 
   @UseGuards(JwtGuard, RoleGuard)
   @Roles(UserRole.MANAGER, UserRole.ADMIN)
-  @Get()
+  @Get('all')
   async findAll(@Req() req: Request) {
     if (req.user) return await this.userService.findAll();
     throw new NotFoundException('Not found!');
@@ -45,15 +45,21 @@ export class UserController {
     UserRole.SALER,
     UserRole.MARKETER,
   )
-  @Get(':id')
+  @Get('get/:id')
   async findOne(@Param('id') id: number, @Req() req: Request) {
     if (req.user) return await this.userService.findOne(id);
     throw new NotFoundException('Not found!');
   }
 
   @UseGuards(JwtGuard, RoleGuard)
-  @Roles(UserRole.MANAGER, UserRole.EMPLOYEE, UserRole.SALER, UserRole.MARKETER)
-  @Patch(':id/UpdateUserDto')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.MANAGER,
+    UserRole.EMPLOYEE,
+    UserRole.SALER,
+    UserRole.MARKETER,
+  )
+  @Patch('update/:id/UpdateUserDto')
   async update(
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,
@@ -65,7 +71,7 @@ export class UserController {
 
   @UseGuards(JwtGuard, RoleGuard)
   @Roles(UserRole.MANAGER, UserRole.ADMIN)
-  @Delete(':id')
+  @Delete('delete/:id')
   async remove(@Param('id') id: number, @Req() req: Request) {
     if (req.user) return await this.userService.remove(id);
     throw new UnauthorizedException('You are not allowed to do the operation!');

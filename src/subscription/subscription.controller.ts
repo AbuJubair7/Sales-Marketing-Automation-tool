@@ -22,39 +22,40 @@ export class SubscriptionController {
 
   @UseGuards(JwtGuard, RoleGuard)
   @Roles(UserRole.MANAGER)
-  @Post('/CreateSubscriptionDto')
+  @Post('CreateSubscriptionDto')
   async create(@Body() createSubscriptionDto: CreateSubscriptionDto) {
-    return this.subscriptionService.create(createSubscriptionDto);
+    return await this.subscriptionService.create(createSubscriptionDto);
+    //console.log(createSubscriptionDto);
   }
 
   @UseGuards(JwtGuard, RoleGuard)
   @Roles(UserRole.ADMIN)
-  @Get()
+  @Get('all')
   async findAll() {
-    return this.subscriptionService.findAll();
+    return await this.subscriptionService.findAll();
   }
 
   @UseGuards(JwtGuard, RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
-  @Get(':id')
+  @Get('get/:id')
   async findOne(@Param('id') id: number) {
-    return this.subscriptionService.findOne(+id);
+    return await this.subscriptionService.findOne(+id);
   }
 
   @UseGuards(JwtGuard)
   @Roles(UserRole.MANAGER)
-  @Patch(':id/UpdateSubscriptionDto')
+  @Patch('update/:id/UpdateSubscriptionDto')
   async update(
     @Param('id') id: number,
     @Body() updateSubscriptionDto: UpdateSubscriptionDto,
   ) {
-    return this.subscriptionService.update(+id, updateSubscriptionDto);
+    return await this.subscriptionService.update(+id, updateSubscriptionDto);
   }
 
   @UseGuards(JwtGuard, RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
-  @Delete(':id')
+  @Delete('delete/:id')
   async remove(@Param('id') id: string) {
-    return this.subscriptionService.remove(+id);
+    return await this.subscriptionService.remove(+id);
   }
 }

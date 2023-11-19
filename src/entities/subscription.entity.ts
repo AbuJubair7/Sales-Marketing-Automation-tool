@@ -6,6 +6,9 @@ export class Subscription {
   id: number;
 
   @Column({ nullable: false })
+  paymentId: number;
+
+  @Column({ nullable: false })
   subscriberId: number;
 
   @Column({ nullable: false })
