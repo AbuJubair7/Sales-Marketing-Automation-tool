@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Welcome..Sales and marketing automation tool!';
+    return 'Welcome to sales and marketing automation tools';
   }
 }

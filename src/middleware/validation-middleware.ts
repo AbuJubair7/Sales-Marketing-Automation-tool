@@ -8,6 +8,7 @@ import { CreateSubscriptionDto } from 'src/subscription/dto/create-subscription.
 import { UpdateSubscriptionDto } from 'src/subscription/dto/update-subscription.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UpdateUserDto } from 'src/user/dto/update-user.dto';
+import { PaymentDto } from 'src/payment/dto/payment.dto';
 
 @Injectable()
 export class ValidationMiddleware implements NestMiddleware {
@@ -22,6 +23,7 @@ export class ValidationMiddleware implements NestMiddleware {
       UpdateAuthDto,
       UpdateUserDto,
       ContactDto,
+      PaymentDto,
       CreateSubscriptionDto,
       UpdateSubscriptionDto,
     };

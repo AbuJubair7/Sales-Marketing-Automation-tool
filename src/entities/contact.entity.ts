@@ -12,7 +12,7 @@ export class Contact {
   @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ nullable: false })
   mobile: number;
 
   @Column({ nullable: false })
@@ -21,8 +21,8 @@ export class Contact {
   @Column({ nullable: false })
   address: string;
 
-    @OneToMany(() => Tracking, tracking => tracking.contact)
-    tracking: Tracking[];
+  @OneToMany(() => Tracking, tracking => tracking.contact)
+  tracking: Tracking[];
 
     // @BeforeInsert()
     // async hashPassword() {
