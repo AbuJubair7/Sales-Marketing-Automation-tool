@@ -13,12 +13,9 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ValidationMiddleware } from './middleware/validation-middleware';
 import { TrackingModule } from './leadTracking/tracking.module';
-<<<<<<< HEAD
 import { PaymentModule } from './payment/payment.module';
 import { PaymentPlanModule } from './paymentPlan/paymentPlan.module';
-=======
 import { SubscriptionModule } from './subscription/subscription.module';
->>>>>>> 53045a1e8b7719102cef943de676f26ebda3fc16
 
 @Module({
   imports: [

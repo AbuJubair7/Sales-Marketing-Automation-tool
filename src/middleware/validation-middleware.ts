@@ -8,7 +8,6 @@ import { CreateSubscriptionDto } from 'src/subscription/dto/create-subscription.
 import { UpdateSubscriptionDto } from 'src/subscription/dto/update-subscription.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UpdateUserDto } from 'src/user/dto/update-user.dto';
-import { ContactDto } from 'src/contact/dto/contact.dto';
 import { PaymentDto } from 'src/payment/dto/payment.dto';
 
 @Injectable()
