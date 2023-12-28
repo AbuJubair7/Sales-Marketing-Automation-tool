@@ -3,6 +3,9 @@ import { plainToClassFromExist } from 'class-transformer';
 import { validate } from 'class-validator';
 import { CreateAuthDto } from 'src/auth/dto/create-auth.dto';
 import { UpdateAuthDto } from 'src/auth/dto/update-auth.dto';
+import { ContactDto } from 'src/contact/dto/contact.dto';
+import { CreateSubscriptionDto } from 'src/subscription/dto/create-subscription.dto';
+import { UpdateSubscriptionDto } from 'src/subscription/dto/update-subscription.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UpdateUserDto } from 'src/user/dto/update-user.dto';
 import { ContactDto } from 'src/contact/dto/contact.dto';
@@ -22,6 +25,8 @@ export class ValidationMiddleware implements NestMiddleware {
       UpdateUserDto,
       ContactDto,
       PaymentDto,
+      CreateSubscriptionDto,
+      UpdateSubscriptionDto,
     };
 
     const selectedDto = dtoClasses[dtoData];

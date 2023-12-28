@@ -43,27 +43,27 @@ export class ContactController {
   //@UseGuards(JwtGuard)
   @Get('findall')
   findAll() {
-      return this.service.findAll();
+    return this.service.findAll();
   }
 
   //@UseGuards(JwtGuard)
   @Put('update/:data')
   async update(@Param('data') id: number, @Body() data: ContactDto) {
-      await this.service.updateContact(id, data);
-      return await 'Updated successfully!';
+    await this.service.updateContact(id, data);
+    return await 'Updated successfully!';
   }
 
   //@UseGuards(JwtGuard)
   @Delete('delete/:id')
   async delete(@Param('id') id: number) {
-      await this.service.deleteContact(id);
-      return await 'Deleted successfully!';
+    await this.service.deleteContact(id);
+    return await 'Deleted successfully!';
   }
 
   //@UseGuards(JwtGuard)
   @Get('export')
   async exportToCsv() {
-      await this.service.exportToCsv();
-      return await 'Exported successfully!';
+    await this.service.exportToCsv();
+    return await 'Exported successfully!';
   }
 }

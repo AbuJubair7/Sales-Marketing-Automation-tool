@@ -13,7 +13,7 @@ import { Payment } from './payment.entity';
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column({ nullable: false })
   name: string;
 

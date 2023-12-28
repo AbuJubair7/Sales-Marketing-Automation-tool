@@ -14,22 +14,28 @@ export class AuthService {
   ) {}
 
   async signUp(createAuthDto: CreateAuthDto) {
-    return await this.userService.create(createAuthDto);
+    const user = await this.userService.create(createAuthDto);
+    user.password = '';
+    const token = await this.signToken(user.id, user.email, user.role);
+    if (!token) throw new UnauthorizedException('Token error!');
+    return { user, token };
   }
 
   async singIn(data: any) {
     const user = await this.userService.findOne(data.email);
-    //console.log(data.email+data.password);
-    
-    if (user && (await bcrypt.compare(data.password, user.password)))
-      return this.signToken(user.id, user.email);
+
+    if (user && (await bcrypt.compare(data.password, user.password))) {
+      const token = await this.signToken(user.id, user.email, user.role);
+      return { user, token };
+    }
     throw new UnauthorizedException('Email or password error!');
   }
 
-  async signToken(userId: number, email: string) {
+  async signToken(userId: number, email: string, role: string) {
     const payload = {
       sub: userId,
       email,
+      role,
     };
     const secretKey = this.config.get('JWT_SECRET');
 
