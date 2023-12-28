@@ -12,7 +12,7 @@ export class Contact {
   @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ nullable: false })
   mobile: number;
 
   @Column({ nullable: false })

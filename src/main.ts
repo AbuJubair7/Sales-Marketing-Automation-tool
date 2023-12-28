@@ -3,11 +3,16 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.useGlobalPipes(
-  //   new ValidationPipe({
-  //     whitelist: true,
-  //   }),
-  // );
-  await app.listen(3000);
+  app.enableCors({
+
+    origin: '*', // Allow requests from your Next.js app
+
+    //methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: '*',
+
+    credentials: true, // Enable credentials (if needed)
+
+  });
+  await app.listen(8000);
 }
 bootstrap();
