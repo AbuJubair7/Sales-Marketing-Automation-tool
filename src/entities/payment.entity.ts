@@ -19,11 +19,11 @@ export class Payment {
   @Column({ nullable: false })
   paymentPlan: string; // 'basic', 'ultra', 'premium'
 
-  @Column({ type: 'date', nullable: false })
+  @Column({ nullable: false })
   paymentDate: Date;
 
-  @Column({ nullable: false })
-  end: string;
+  // @Column({ nullable: false })
+  // endDate: Date;
 
   @Column({ nullable: false })
   status: boolean;

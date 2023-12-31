@@ -18,10 +18,12 @@ export class PaymentService {
     private readonly userRepo: Repository<User>,
   ) {}
 
-  async purchasePlan(data: any) {
-    const buyer = await this.userRepo.findOne({ where: { email: data.email } });
+  async purchasePlan(userData: any) {
+    const buyer = await this.userRepo.findOne({
+      where: { email: userData.email },
+    });
     const selectedPlan = await this.paymentPlanRepo.findOne({
-      where: { paymentPlan: data.paymentPlan },
+      where: { paymentPlan: userData.paymentPlan },
     });
     if (!buyer || !selectedPlan) {
       throw new NotFoundException('Payment requirements not found');
@@ -31,9 +33,14 @@ export class PaymentService {
         email: buyer.email,
         paymentPlan: selectedPlan.paymentPlan,
         paymentDate: new Date(),
-        end: new Date().setDate(new Date().getDate() + 30).toString(),
         status: true,
       };
+      const pastTransaction = await this.paymentRepo.findOne({
+        where: { email: buyer.email },
+      });
+      if (pastTransaction) {
+        return await this.update(data, buyer.email);
+      }
       const pay = await this.paymentRepo.create(data);
       return await this.paymentRepo.save(pay);
     } catch {
@@ -49,10 +56,11 @@ export class PaymentService {
     const payment = await this.paymentRepo.findOne({
       where: { email: user.email },
     });
-    if (!payment) {
-      throw new NotFoundException('Payment not found');
+    console.log(payment);
+    if (payment) {
+      return payment;
     }
-    return payment; // 200
+    throw new NotFoundException('Payment not found');
   }
 
   async update(data: any, email: string) {
@@ -66,6 +74,7 @@ export class PaymentService {
     if (!payment) {
       throw new NotFoundException('Payment not found'); // 404
     }
-    return await this.paymentRepo.update(user.email, data);
+    payment.paymentPlan = data.paymentPlan;
+    return await this.paymentRepo.update({ email: user.email }, payment);
   }
 }

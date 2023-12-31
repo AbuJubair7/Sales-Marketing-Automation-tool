@@ -9,6 +9,7 @@ import {
   Req,
   NotFoundException,
   UnauthorizedException,
+  Param,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -56,10 +57,13 @@ export class UserController {
     UserRole.SALER,
     UserRole.MARKETER,
   )
-  @Patch('update/UpdateUserDto')
-  async update(@Body() updateUserDto: UpdateUserDto, @Req() req: Request) {
-    if (req.user)
-      return await this.userService.update((req.user as any).id, updateUserDto);
+  @Patch('update/:id/UpdateUserDto')
+  async update(
+    @Param('id') id: any,
+    @Body() updateUserDto: UpdateUserDto,
+    @Req() req: Request,
+  ) {
+    if (req.user) return await this.userService.update(id, updateUserDto);
     throw new UnauthorizedException('You are not allowed to do the operation!');
   }
 
