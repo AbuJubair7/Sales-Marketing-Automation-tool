@@ -12,6 +12,6 @@ export class PaymentPlan {
   @Column({ nullable: false })
   paymentPrice: string;
 
-  @OneToMany(() => Payment, payment => payment.paymentPlan)
+  @OneToMany(() => Payment, (payment) => payment.paymentPlan)
   payment: Payment[];
 }
