@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
 import { PaymentPlan } from './paymentPlan.entity';
 import { User } from './user.entity';
 
@@ -8,15 +14,21 @@ export class Payment {
   paymentId: number;
 
   @Column({ nullable: false })
-  email: string
+  email: string;
 
   @Column({ nullable: false })
   paymentPlan: string; // 'basic', 'ultra', 'premium'
 
-  @Column({ type: 'date', nullable: false  })
-  paymentDate: Date; 
+  @Column({ type: 'date', nullable: false })
+  paymentDate: Date;
 
-  @ManyToOne(() => PaymentPlan, { onDelete: 'CASCADE' }) 
+  @Column({ nullable: false })
+  end: string;
+
+  @Column({ nullable: false })
+  status: boolean;
+  // connections
+  @ManyToOne(() => PaymentPlan, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'paymentPlan', referencedColumnName: 'paymentPlan' })
   PaymentPlan: PaymentPlan;
 

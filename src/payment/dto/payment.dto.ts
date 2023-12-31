@@ -1,10 +1,10 @@
-import { IsEmail, IsNotEmpty } from "class-validator";
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
-export class PaymentDto{
-    @IsNotEmpty()
-    @IsEmail()
-    readonly email: string; 
-    
-    @IsNotEmpty()
-    readonly paymentPlan: string;  
+export class PaymentDto {
+  @IsNotEmpty()
+  @IsEmail()
+  readonly email: string;
+
+  @IsNotEmpty()
+  readonly paymentPlan: string;
 }
